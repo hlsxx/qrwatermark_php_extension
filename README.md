@@ -1,6 +1,6 @@
 # qrwatermark_php
 PHP extension for the qrwatermark library
-![QR Code](https://github.com/hlsxx/qrwatermark_php/php/qrwatermark.png)
+![QR Code](./php/qrwatermark.png)
 
 Check more about [qrwatermark](https://github.com/hlsxx/qrwatermark) written in the Rust programming language
 
