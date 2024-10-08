@@ -14,7 +14,7 @@ First locate active php.ini
 
 For e.g.: /usr/lib/php/20230831
 
-`cp qrwatermark.so /usr/lib/php/20230831/qrwatermark.so`
+`cp target/release/libqrwatermark.so /usr/lib/php/20230831/qrwatermark.so`
 
 ### Make symlinks CLI/Apache
 `ln -s /etc/php/8.3/mods-available/qrwatermark.ini /etc/php/8.3/cli/conf.d/30-qrwatermark.ini`

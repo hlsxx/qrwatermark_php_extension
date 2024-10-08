@@ -1,5 +1,6 @@
 use ext_php_rs::prelude::*;
 use qrwatermark::configs::image_config::ImageConfigBuilder;
+use qrwatermark::configs::logo_config::LogoConfigBuilder;
 use qrwatermark::traits::builder::Builder;
 use qrwatermark::QrWatermark;
 
@@ -14,9 +15,15 @@ fn qrwatermark_generate(
     .color(color)
     .build();
 
+  let logo_config =  LogoConfigBuilder::new()
+    .width(70)
+    .height(70)
+    .build();
+
   let mut qrw = QrWatermark::new(qr_code_text)
     .logo(logo_path)
-    .image_config(image_config);
+    .image_config(image_config)
+    .logo_config(logo_config);
 
   match qrw.save_as_png(result_image_path) {
     Ok(_) => true,
