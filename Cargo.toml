@@ -9,7 +9,7 @@ name = "qrwatermark"
 
 [dependencies]
 ext-php-rs = "*"
-qrwatermark = { path = "./../qrwatermark" }
+qrwatermark = { path = "./../qrwatermark", version = "1.0.1" }
 
 [profile.release]
 strip = "debuginfo"

@@ -1,5 +1,6 @@
 use ext_php_rs::prelude::*;
 use std::convert::TryInto;
+use std::error;
 use qrwatermark::configs::image_config::ImageConfigBuilder;
 use qrwatermark::configs::logo_config::LogoConfigBuilder;
 use qrwatermark::traits::builder::Builder;
@@ -12,19 +13,28 @@ fn vec_to_array(vec_data: Vec<u8>) -> [u8; 3] {
 #[php_function]
 fn qrwatermark_generate(
   qr_code_text: &str,
-  logo_path: &str,
+  logo_path: Option<&str>,
   result_image_path: &str,
   color: Option<Vec<u8>>,
+  color_gradient: Option<Vec<Vec<u8>>>,
   background_color: Option<Vec<u8>>,
   is_gradient_enabled: Option<bool>,
   logo_width: Option<u32>,
   logo_height: Option<u32>
-) -> bool {
+) -> Result<bool, PhpException> {
   let mut image_config = ImageConfigBuilder::new();
 
   // Custom color
   if let Some(color_data) = color {
     image_config = image_config.color(vec_to_array(color_data));
+  }
+
+  // Custom gradient color
+  if let Some(color_gradient_data) = color_gradient {
+    if color_gradient_data.len() == 2 {
+      let rgbs_tuple = (vec_to_array(color_gradient_data[0].clone()), vec_to_array(color_gradient_data[1].clone()));
+      image_config = image_config.color_gradient(rgbs_tuple);
+    }
   }
 
   // Custom background color
@@ -52,14 +62,18 @@ fn qrwatermark_generate(
   }
 
   let mut qrw = QrWatermark::new(qr_code_text)
-    .logo(logo_path)
     .image_config(image_config.build())
     .logo_config(logo_config.build());
 
-  match qrw.save_as_png(result_image_path) {
-    Ok(_) => true,
-    Err(_) => false
+  if let Some(logo_path_data) = logo_path {
+    qrw = qrw.logo(logo_path_data);
   }
+
+  if let Err(err) = qrw.save_as_image(result_image_path) {
+    return Err(PhpException::default(err.to_string()));
+  }
+
+  Ok(true)
 }
 
 #[php_module]

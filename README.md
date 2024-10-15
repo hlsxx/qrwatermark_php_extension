@@ -1,33 +1,56 @@
-# qrwatermark_php
-![QR Code](https://github.com/hlsxx/qrwatermark_php/blob/master/php/qrwatemark.png)
+# QrWatermark PHP extension
 
-PHP extension for the qrwatermark library
+This is a Rust-based PHP extension that provides QR code creation with watermark support.
 
-Check more about [qrwatermark](https://github.com/hlsxx/qrwatermark) written in the Rust programming language
+## Simple test with CLI
+From the current root dir:
 
-## Install a PHP extension
-First locate active php.ini
+```
+php -d extension=/path_to/qrwatermark.so php/example.php
+```
 
-`php --ini`
+## Installation
 
-`php -i | grep extension_dir`
+1. Download the `.so` file from the [releases](https://github.com/yourusername/my_php_extension/releases) section or directly from this repository.
+2. Copy the `.so` file to your PHP extensions directory. The directory can typically be found by running `php -i | grep extension_dir`.
+3. Add the following line to your `php.ini` file:
 
-For e.g.: /usr/lib/php/20230831
+```ini
+extension=qrwatermark.so
+```
 
-`cp target/release/libqrwatermark.so /usr/lib/php/20230831/qrwatermark.so`
+### Installation hints
 
-### Make symlinks CLI/Apache
-`ln -s /etc/php/8.3/mods-available/qrwatermark.ini /etc/php/8.3/cli/conf.d/30-qrwatermark.ini`
-`ln -s /etc/php/8.3/mods-available/qrwatermark.ini /etc/php/8.3/apache2/conf.d/30-qrwatermark.ini`
+First locate an active php.ini
 
-`sudo systemctl restart apache2`
+```
+php --ini
+```
+
+```
+php -i | grep extension_dir
+```
+
+For e.g.: /usr/lib/php/20200831
+
+```
+cp target/release/libqrwatermark.so /usr/lib/php/20200831/qrwatermark.so
+```
+
+Create symlins CLI/Apache
+
+```
+ln -s /etc/php/8.3/mods-available/qrwatermark.ini /etc/php/8.3/cli/conf.d/30-qrwatermark.ini
+ln -s /etc/php/8.3/mods-available/qrwatermark.ini /etc/php/8.3/apache2/conf.d/30-qrwatermark.ini
+```
+
+```
+sudo systemctl restart apache2
+````
 
 Validate installed PHP extension
-`php -m | grep qrwatermark`
+```
+php -m | grep qrwatermark
+```
 
-## How to use it?
-### PHP CLI command
-cd php && php -d extension=/path_to/libqrwatermark_php.so example.php
-
-
-
+Check more about [qrwatermark](https://github.com/hlsxx/qrwatermark) written in the Rust programming language
