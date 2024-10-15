@@ -2,6 +2,14 @@
 
 This is a Rust-based PHP extension that provides QR code creation with watermark support.
 
+Recommended used with official PHP connector
+
+```
+composer require hlsxx/qrwatermark
+```
+
+More about: https://github.com/hlsxx/qrwatermark_php
+
 ## Simple test with CLI
 From the current root dir:
 
