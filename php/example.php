@@ -2,8 +2,8 @@
 
 $isQrWaterMarkGenerated = qrwatermark_generate(
   "TEST from PHP",
+  "./qrwatemark.png",
   "./php_logo.png",
-  "./../qr_codes/qrwatemark.png"
 );
 
 if ($isQrWaterMarkGenerated) {

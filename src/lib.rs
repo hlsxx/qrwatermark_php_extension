@@ -13,8 +13,8 @@ fn vec_to_array(vec_data: Vec<u8>) -> [u8; 3] {
 #[php_function]
 fn qrwatermark_generate(
   qr_code_text: &str,
-  logo_path: Option<&str>,
   result_image_path: &str,
+  logo_path: Option<String>,
   color: Option<Vec<u8>>,
   color_gradient: Option<Vec<Vec<u8>>>,
   background_color: Option<Vec<u8>>,
@@ -65,7 +65,7 @@ fn qrwatermark_generate(
     .image_config(image_config.build())
     .logo_config(logo_config.build());
 
-  if let Some(logo_path_data) = logo_path {
+  if let Some(logo_path_data) = &logo_path {
     qrw = qrw.logo(logo_path_data);
   }
 
