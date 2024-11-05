@@ -1,6 +1,6 @@
 [package]
 name = "qrwatermark"
-version = "1.0.0"
+version = "1.0.2"
 edition = "2021"
 
 [lib]
@@ -12,4 +12,8 @@ ext-php-rs = "*"
 qrwatermark = { path = "./../qrwatermark", version = "1.0.1" }
 
 [profile.release]
-strip = "debuginfo"
+panic = "abort"
+strip = true
+lto = "fat"
+opt-level = "z"
+codegen-units = 1
