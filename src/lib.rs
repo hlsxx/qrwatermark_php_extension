@@ -20,9 +20,11 @@ fn qrwatermark_generate(
   background_color: Option<Vec<u8>>,
   is_gradient_enabled: Option<bool>,
   logo_width: Option<u32>,
-  logo_height: Option<u32>
+  logo_height: Option<u32>,
+  pixel_size: Option<u32>
 ) -> Result<bool, PhpException> {
-  let mut image_config = ImageConfigBuilder::new();
+  let mut image_config = ImageConfigBuilder::new()
+    .pixel_size(pixel_size.unwrap_or(10));
 
   // Custom color
   if let Some(color_data) = color {
@@ -45,7 +47,7 @@ fn qrwatermark_generate(
   // Is gradient enabled
   if let Some(is_gradient_enabled_data) = is_gradient_enabled {
     if is_gradient_enabled_data {
-      image_config = image_config.is_gradient_enabled();
+      image_config = image_config.is_auto_gradient_enabled();
     }
   }
 
