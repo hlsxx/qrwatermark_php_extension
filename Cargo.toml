@@ -1,6 +1,6 @@
 [package]
 name = "qrwatermark"
-version = "1.0.2"
+version = "0.1.2"
 edition = "2021"
 
 [lib]
@@ -9,7 +9,7 @@ name = "qrwatermark"
 
 [dependencies]
 ext-php-rs = "*"
-qrwatermark = { path = "./../qrwatermark", version = "1.0.1" }
+qrwatermark = "0.1.2"
 
 [profile.release]
 panic = "abort"

@@ -1,6 +1,5 @@
 use ext_php_rs::prelude::*;
 use std::convert::TryInto;
-use std::error;
 use qrwatermark::configs::image_config::ImageConfigBuilder;
 use qrwatermark::configs::logo_config::LogoConfigBuilder;
 use qrwatermark::traits::builder::Builder;
